@@ -1,3 +1,4 @@
+location = "index.html"
 function aws_config(access_key, secret_access_key, region){
     AWS.config.update({
         //region: "us-east-1",
