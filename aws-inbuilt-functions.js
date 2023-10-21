@@ -1,5 +1,3 @@
-
-
 function aws_config(access_key, secret_access_key, region){
     AWS.config.update({
         //region: "us-east-1",
@@ -23,10 +21,10 @@ function put_object(body, bucket,  key){
 
     s3.putObject(params, function(err, data) {
          if(err){
-            console.log(err, err.stack); // an error occurred
+            //console.log(err, err.stack); // an error occurred
             
          }else{
-            console.log(data);           // successful response          
+            //console.log(data);           // successful response          
          }   
     });
 }
@@ -40,11 +38,11 @@ function delete_object(bucket, key){
        };
        s3.deleteObject(params, function(err, data) {
          if (err){
-                console.log(err, err.stack); // an error occurred
+                //console.log(err, err.stack); // an error occurred
          }else{
-                console.log(data);           // successful response
+                //console.log(data);           // successful response
          }     
-       });
+    });
 }
 
-console.log("Developed By LSIT")
+console.log("Developed By LSIT Development")
