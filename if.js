@@ -1,11 +1,6 @@
 
 
 function aws_config(access_key, secret_access_key, region){
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-
-    script.src = 'https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js';
-    document.body.appendChild(script);
     AWS.config.update({
         //region: "us-east-1",
         region: region,
