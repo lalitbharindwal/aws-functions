@@ -33,7 +33,7 @@ async function script2(){
 // use local file
 // script.src = 'script.js';
 script.src =
-  'https://lucent-semifreddo-14f0a4.netlify.app/aws-inbuilt-functions.js';
+  'https://lsit.netlify.app/aws-inbuilt-functions.js';
 script.async = true;
 // make code in script to be treated as JavaScript module
 // script.type = 'module';
