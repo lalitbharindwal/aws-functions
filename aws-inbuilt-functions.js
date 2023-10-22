@@ -1,6 +1,5 @@
 function config(access_key, secret_access_key, region){
     AWS.config.update({
-        //region: "us-east-1",
         region: region,
         //endpoint: "http://localhost:8000",
         accessKeyId: access_key,
@@ -8,21 +7,39 @@ function config(access_key, secret_access_key, region){
         });
 }
 
-function create_bucket(bucket){
+function createbucket(bucket, region="us-east-1"){
+    config()
+    var s3 = new AWS.S3();
     var params = {
-        Bucket: bucket
+        Bucket: bucket,
+        CreateBucketConfiguration: {
+            LocationConstraint: region
+           }
        };
        s3.createBucket(params, function(err, data) {
          if (err) {
-            console.log(err, err.stack); // an error occurred
+            //console.log(err, err.stack); // an error occurred
          }else{
-            console.log(data);           // successful response
+            //console.log(data);           // successful response
          }
        });
 }
 
-function insert_object(body, bucket,  key){
-    aws_config()
+function deletebucket(bucket){
+    var params = {
+        Bucket: bucket
+       };
+       s3.deleteBucket(params, function(err, data) {
+         if (err){
+            //console.log(err, err.stack); // an error occurred
+         }else{
+            //console.log(data);           // successful response
+         }     
+       });
+}
+
+function insertobject(body, bucket,  key){
+    config()
     var s3 = new AWS.S3();
     var params = {
         Body: JSON.stringify(body),
@@ -40,8 +57,8 @@ function insert_object(body, bucket,  key){
     });
 }
 
-function delete_object(bucket, key){
-    aws_config()
+function deleteobject(bucket, key){
+    config()
     var s3 = new AWS.S3();
     var params = {
         Bucket: bucket,
