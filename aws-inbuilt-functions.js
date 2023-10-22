@@ -10,21 +10,27 @@ function config(access_key, secret_access_key, region){
 }
 
 function createbucket(bucket, region="us-east-1"){
-    config()
-    var s3 = new AWS.S3();
-    var params = {
-        Bucket: bucket,
-        CreateBucketConfiguration: {
-            LocationConstraint: region
-           }
-       };
-       s3.createBucket(params, function(err, data) {
-         if (err) {
-            console.log(err, err.stack); // an error occurred
-         }else{
-            console.log(data);           // successful response
-         }
-       });
+    try {
+        config()
+        var s3 = new AWS.S3();
+        var params = {
+            Bucket: bucket,
+            CreateBucketConfiguration: {
+                LocationConstraint: region
+            }
+        };
+        s3.createBucket(params, function(err, data) {
+            if (err) {
+                //console.log(err, err.stack); // an error occurred
+            }else{
+                //console.log(data);           // successful response
+            }
+        });
+      }
+      catch(err) {
+        console.log(err.message)
+      }
+    
 }
 
 function deletebucket(bucket){
