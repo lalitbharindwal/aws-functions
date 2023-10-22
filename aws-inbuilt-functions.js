@@ -1,3 +1,5 @@
+//Created By LSIT Development
+
 function config(access_key, secret_access_key, region){
     AWS.config.update({
         region: region,
@@ -18,9 +20,9 @@ function createbucket(bucket, region="us-east-1"){
        };
        s3.createBucket(params, function(err, data) {
          if (err) {
-            //console.log(err, err.stack); // an error occurred
+            console.log(err, err.stack); // an error occurred
          }else{
-            //console.log(data);           // successful response
+            console.log(data);           // successful response
          }
        });
 }
