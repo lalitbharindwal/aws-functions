@@ -4,7 +4,10 @@
     <script>
         function create_bucket(){
             config("AKIAVVALCTCZPOR5QOH2", "hba81e4BrwOky9aSHvbAwWBRtGZUAJqHJgJDmrwh")
-            deletebucket("temp-testing-buc")
+            //headbucket("temp-testing-buc")
+            var temp = getobject("temp-testing-buc", "upi.html")
+            console.log(temp)
+            
             
         }
     </script>

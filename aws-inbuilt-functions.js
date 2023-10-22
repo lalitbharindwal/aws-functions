@@ -47,10 +47,11 @@ function headbucket(bucket){
             if(err.message == "Missing credentials in config"){
             console.log("CredentialsError: Missing credentials in config\nuse config(access_key, secret_access_key, region) function to configure aws account\nconfig(access_key, secret_access_key, region)\nParameters :-\naccess_key : Access Key of Aws Account\nsecret_access_key : Secret Access Key of Aws Account\nregion - (default - us-east-1) af-south-1 | ap-east-1 | ap-northeast-1 | ap-northeast-2 | ap-northeast-3 | ap-south-1 | ap-southeast-1 | ap-southeast-2 | ap-southeast-3 | ca-central-1 | cn-north-1 | cn-northwest-1 | EU | eu-central-1 | eu-north-1 | eu-south-1 | eu-west-1 | eu-west-2 | eu-west-3 | me-south-1 | sa-east-1 | us-east-2 | us-gov-east-1 | us-gov-west-1 | us-west-1 | us-west-2 | ap-south-2 | eu-south-2")
             }else if(err.message == "Network Failure"){
-               console.log("BucketNotFoundError: Bucket Not Found")
-           }
+                console.log("CorsConfigurationError: CORS Permission Failure\nEither bucket Doesn't Exist or Configure Cross-origin resource sharing (CORS) permission of bucket\n1. Open the Amazon S3 console at https://console.aws.amazon.com/s3/.\n2. Select the name of the bucket that you have to delete from the bucket list.\n3. Next, Choose 'Permission' tab.\n4. Then in an editor titled 'Cross-origin resource sharing (CORS)', you need to make sure the S3 bucket has CORS configuration:")
+            }
+            //console.log(err)
         }else{
-            //console.log(data);           // successful response
+            console.log(data);           // successful response
         }     
    });
 }
@@ -93,6 +94,26 @@ function insertobject(body, bucket,  key){
             //console.log(data);           // successful response          
          }   
     });
+}
+
+function getobject(bucket, key){
+    var s3 = new AWS.S3();
+    var params = {
+    Bucket: bucket, 
+    Key: key, 
+    };
+    s3.getObject(params, function(err, data) {
+    if (err) console.log(err, err.stack); // an error occurred
+    else{
+        
+        var detail_json   = data.Body.toString('utf-8');         // successful response
+        sessionStorage.setItem("get_object_data_temp", detail_json)
+    }
+    
+    });
+    var get_object_data = sessionStorage.getItem("get_object_data_temp")
+    sessionStorage.setItem("get_object_data_temp", null)
+    return get_object_data
 }
 
 function deleteobject(bucket, key){
